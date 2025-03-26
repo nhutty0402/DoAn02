@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thanh toán</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .thanhtoan-btn.completed {
+            background-color: #28a745;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .thanhtoan-btn.pending {
+            background-color: #ffcc00;
+            color: black;
+        }
+        .debt-info.overdue {
+            color: red;
+            font-weight: bold;
+        }
+        .notification-icon {
+            color: red;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="khachhang">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Dãy</th>
+                    <th>Phòng</th>
+                    <th>Tên</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Sửa chữa</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="pending" data-id="1">
+                    <td>1</td>
+                    <td>Có gác</td>
+                    <td>101</td>
+                    <td>Phạm Hồng Nhựt Ty</td>
+                    <td>0342090665</td>
+                    <td data-original="Cánh cửa: 300 VND">Cánh cửa: 300 VND</td>
+                    <td>
+                        <a href="capnhathoadon.html" class="btn btn-info chinhsua">Hóa Đơn</a>
+                    </td>
+                </tr>
+                <tr class="pending" data-id="6">
+                    <td>6</td>
+                    <td>Không gác</td>
+                    <td>101</td>
+                    <td>Phạm Hồng Nhựt Ty</td>
+                    <td>0342090665</td>
+                    <td data-original=""></td>
+                    <td>
+                        <a href="xuathoadon.html" class="btn btn-info xemchitiet">Xem Hóa Đơn</a>
+                        <button class="thanhtoan-btn btn btn-primary" onclick="handlePayment(this)">Thanh Toán</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Thư viện JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        function handlePayment(button) {
+            const row = button.closest('tr');
+            const choice = prompt('Chọn trạng thái thanh toán:\n1. Đã Thanh Toán\n2. Đang Nợ\nNhập 1 hoặc 2:');
+            
+            if (choice === '1') {
+                // Xử lý trạng thái "Đã Thanh Toán"
+                row.classList.remove('pending');
+                row.classList.add('completed');
+                button.classList.remove('pending');
+                button.classList.add('completed');
+                button.textContent = 'Thanh Toán';
+                button.disabled = true; // Vô hiệu hóa nút khi đã thanh toán
+                const debtCell = row.cells[5];
+                const originalContent = debtCell.getAttribute('data-original') || debtCell.textContent.trim();
+                debtCell.innerHTML = originalContent;
+                savePaymentStatus();
+            } else if (choice === '2') {
+                // Xử lý trạng thái "Đang Nợ"
+                const debtAmount = prompt('Nhập số tiền nợ (VND):');
+                if (!debtAmount || isNaN(debtAmount)) {
+                    alert('Vui lòng nhập số tiền hợp lệ!');
+                    return;
+                }
+
+                const tempInput = document.createElement('input');
+                tempInput.type = 'text';
+                tempInput.style.position = 'absolute';
+                tempInput.style.opacity = '0';
+                document.body.appendChild(tempInput);
+
+                flatpickr(tempInput, {
+                    dateFormat: 'd/m/Y',
+                    onClose: function(selectedDates, dateStr) {
+                        if (!dateStr) {
+                            alert('Vui lòng chọn ngày hạn trả!');
+                            document.body.removeChild(tempInput);
+                            return;
+                        }
+
+                        const totalAmount = prompt('Nhập tổng số tiền của phòng (VND):');
+                        if (!totalAmount || isNaN(totalAmount)) {
+                            alert('Vui lòng nhập tổng số tiền hợp lệ!');
+                            document.body.removeChild(tempInput);
+                            return;
+                        }
+
+                        const debtInfo = `Nợ: ${debtAmount} VND - Hạn: ${dateStr} - Tổng: ${totalAmount} VND`;
+                        const debtCell = row.cells[5];
+                        debtCell.innerHTML = `${debtCell.getAttribute('data-original') || debtCell.textContent.trim()}<br><span class="debt-info">${debtInfo}</span>`;
+                        button.classList.remove('completed');
+                        button.classList.add('pending');
+                        row.classList.remove('completed');
+                        row.classList.add('pending');
+                        button.disabled = false; // Đảm bảo nút vẫn hoạt động khi đang nợ
+                        button.textContent = 'Thanh Toán';
+                        savePaymentStatus();
+                        checkDueDate(row, dateStr);
+                        document.body.removeChild(tempInput);
+                    }
+                }).open();
+            } else {
+                alert('Lựa chọn không hợp lệ!');
+            }
+        }
+
+        // Khôi phục trạng thái từ localStorage khi tải lại trang
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('tr[data-id]');
+            rows.forEach(row => {
+                const id = row.getAttribute('data-id');
+                if (!id) return;
+                const isCompleted = localStorage.getItem(`payment_${id}`) === 'completed';
+                const debtInfo = localStorage.getItem(`debt_${id}`);
+                
+                const paymentButton = row.querySelector('.thanhtoan-btn');
+                if (paymentButton) {
+                    paymentButton.textContent = 'Thanh Toán';
+                    paymentButton.disabled = false; // Đặt lại trạng thái mặc định
+                    if (isCompleted) {
+                        row.classList.remove('pending');
+                        row.classList.add('completed');
+                        paymentButton.classList.remove('pending');
+                        paymentButton.classList.add('completed');
+                        paymentButton.disabled = true; // Vô hiệu hóa nếu đã thanh toán
+                        const debtCell = row.cells[5];
+                        const originalContent = debtCell.getAttribute('data-original') || debtCell.textContent.trim();
+                        debtCell.innerHTML = originalContent;
+                    } else if (debtInfo) {
+                        row.classList.remove('completed');
+                        row.classList.add('pending');
+                        paymentButton.classList.remove('completed');
+                        paymentButton.classList.add('pending');
+                        paymentButton.disabled = false; // Đảm bảo nút hoạt động khi đang nợ
+                        const debtCell = row.cells[5];
+                        debtCell.innerHTML = `${debtCell.getAttribute('data-original') || debtCell.textContent.trim()}<br><span class="debt-info">${debtInfo}</span>`;
+                        const dueDateMatch = debtInfo.match(/Hạn: (\d{2}\/\d{2}\/\d{4})/);
+                        if (dueDateMatch) {
+                            checkDueDate(row, dueDateMatch[1]);
+                        }
+                    }
+                }
+            });
+        });
+
+        // Lưu trạng thái thanh toán vào localStorage
+        function savePaymentStatus() {
+            const rows = document.querySelectorAll('tr[data-id]');
+            rows.forEach(row => {
+                const id = row.getAttribute('data-id');
+                if (!id) return;
+                const paymentButton = row.querySelector('.thanhtoan-btn');
+                
+                if (paymentButton) {
+                    const isCompleted = row.classList.contains('completed');
+                    const debtInfo = row.querySelector('.debt-info')?.textContent || '';
+                    if (isCompleted) {
+                        localStorage.setItem(`payment_${id}`, 'completed');
+                        localStorage.removeItem(`debt_${id}`);
+                    } else if (debtInfo) {
+                        localStorage.setItem(`payment_${id}`, 'pending');
+                        localStorage.setItem(`debt_${id}`, debtInfo);
+                    } else {
+                        localStorage.setItem(`payment_${id}`, 'pending');
+                        localStorage.removeItem(`debt_${id}`);
+                    }
+                }
+            });
+        }
+
+        // Kiểm tra ngày đến hạn và thêm icon thông báo
+        function checkDueDate(row, dueDateStr) {
+            const [day, month, year] = dueDateStr.split('/').map(Number);
+            const dueDate = new Date(year, month - 1, day);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const debtCell = row.cells[5];
+            const debtInfoSpan = debtCell.querySelector('.debt-info');
+            const actionCell = row.cells[6];
+
+            const existingIcon = actionCell.querySelector('.notification-icon');
+            if (existingIcon) existingIcon.remove();
+
+            if (dueDate <= today) {
+                if (debtInfoSpan) {
+                    debtInfoSpan.classList.add('overdue');
+                    debtInfoSpan.textContent += ' (Đã quá hạn)';
+                }
+                const notificationIcon = document.createElement('i');
+                notificationIcon.className = 'fas fa-exclamation-triangle notification-icon';
+                notificationIcon.title = `Phòng ${row.cells[2].textContent} của ${row.cells[3].textContent} đã quá hạn trả nợ!`;
+                actionCell.appendChild(notificationIcon);
+            }
+        }
+
+        // Kiểm tra định kỳ (mỗi 24 giờ)
+        setInterval(() => {
+            const rows = document.querySelectorAll('tr[data-id]');
+            rows.forEach(row => {
+                const debtInfo = localStorage.getItem(`debt_${row.getAttribute('data-id')}`);
+                if (debtInfo) {
+                    const dueDateMatch = debtInfo.match(/Hạn: (\d{2}\/\d{2}\/\d{4})/);
+                    if (dueDateMatch) {
+                        checkDueDate(row, dueDateMatch[1]);
+                    }
+                }
+            });
+        }, 24 * 60 * 60 * 1000);
+    </script>
+</body>
+</html>

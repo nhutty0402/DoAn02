@@ -1,0 +1,29 @@
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+.product, .service {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+input[type="text"] {
+  padding: 5px;
+  flex: 1;
+}
+input[readonly].old-price {
+  background-color: #f0f0f0;
+  color: #666;
+  text-decoration: line-through;
+}
+.btn-group button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.add-btn {
+  padding: 5px 10px;
+  margin-top: 10px;
+}

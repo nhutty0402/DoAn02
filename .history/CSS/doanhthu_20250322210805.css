@@ -1,0 +1,187 @@
+/* CSS giữ nguyên như của bạn */
+.dau {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.chart-box {
+  flex: 1;
+  min-width: 300px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.tai {
+  flex: 1;
+  max-width: 60%;
+  background: #eef1f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-container {
+  flex: 1;
+  max-width: 500px;
+  height: 260px;
+  background: #e6f1fb;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.arrow {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.year-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.year {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.year:hover {
+  background: #d1e7ff;
+}
+
+.selected-year {
+  background: #0095ff !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.box {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background: #fff;
+}
+
+.title, .tit {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.show-all, .all {
+  color: blue;
+  text-decoration: none;
+  float: right;
+}
+
+#lineChart {
+  width: 100% !important;
+  height: 350px !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.coner {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard {
+  display: flex;
+  gap: 25px;
+  padding-right: 150px;
+}
+
+.card {
+  background: #f8fbfe;
+  padding: 20px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card i {
+  font-size: 30px;
+  color: #008cff;
+}
+
+.card-content h3 {
+  font-size: 14px;
+  color: #777;
+}
+
+.card-content p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 10px 15px;
+  padding-right: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  width: fit-content;
+}
+
+.calendar-header i {
+  color: #0095ff;
+  font-size: 20px;
+}

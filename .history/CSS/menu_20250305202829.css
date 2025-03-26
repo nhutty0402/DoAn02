@@ -1,0 +1,524 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Thiết lập body */
+body {
+  min-height: 100vh;
+  background: #e7e7e7;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header ngang */
+.header {
+  width: 100%;
+  height: 60px;
+  background: #6796be;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Sidebar dọc */
+.sidebar {
+  position: fixed;
+  top: 60px; /* Dưới header */
+  left: 0;
+  height: calc(100vh - 60px); /* Chiều cao toàn màn hình trừ header */
+  width: 60px;
+  background: #fff;
+  margin-left: 6px;
+  padding: 2px 1px 0px;
+  transition: width 0.3s ease;
+  box-shadow: 5px 3px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 25px; /* Bo góc */
+  z-index: 900; /* Đảm bảo sidebar nằm trên nội dung */
+}
+
+.sidebar.active {
+  width: 240px;
+}
+
+.logo_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo .icon img {
+  width: 52px;
+  height: auto;
+  margin-left: 29px;
+}
+
+.logo_name {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  display: none;
+}
+
+.sidebar.active .logo_name {
+  display: inline-block;
+  opacity: 1;
+}
+
+.nav_list {
+  margin-top: 5px;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.nav_list li {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  line-height: 50px;
+}
+
+.nav_list li a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.link_name {
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.sidebar.active .link_name {
+  opacity: 1;
+}
+
+/* Nội dung chính */
+.content {
+  margin-top: 60px; /* Khoảng cách tránh header */
+  margin-left: 60px; /* Khoảng cách tránh sidebar khi đóng */
+  padding: 20px;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Thêm transition cho width */
+  width: calc(100% - 60px); /* Chiều rộng ban đầu */
+  max-width: calc(100vw - 60px); /* Giới hạn chiều rộng tối đa */
+}
+
+.sidebar.active ~ .content {
+  margin-left: 240px; /* Khoảng cách khi sidebar mở */
+  width: calc(100% - 240px); /* Thu nhỏ chiều rộng khi sidebar mở */
+  max-width: calc(100vw - 240px); /* Giới hạn chiều rộng tối đa khi sidebar mở */
+}
+
+/* Tìm kiếm */
+.search-bar {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  margin-left: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #5E3582;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 80px;
+  transition: width 0.3s ease;
+}
+
+.search-bar input:focus {
+  width: 270px;
+}
+
+.search-bar button {
+  background-color: #eeaff3;
+  border: none;
+  color: #1c1919;
+  padding: 5px 10px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #f186f1;
+}
+
+.search-bar :active:hover {
+  background-color: white;
+}
+
+.tren {
+  margin-left: 890px;
+}
+
+/* 3 nút trên thanh tìm kiếm */
+.button-group {
+  display: flex;
+  gap: 3px;
+  padding-left: 10px;
+}
+
+.button-group .dathue:hover {
+  background: rgb(167, 222, 214);
+  color: black;
+}
+
+.button-group .phongtrong:hover {
+  background: rgb(246, 237, 156);
+  color: black;
+}
+
+.button-group .hientatca:hover {
+  background: rgba(249, 205, 158, 0.952);
+  color: black;
+}
+
+/* Màu sắc các nút */
+.button-group .chinhsua {
+  background: #4b89cb;
+  color: #ffffff;
+}
+
+.button-group .chinhsua:hover {
+  background: #5e8fc4;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-group .chitiet {
+  background: #8fd1f3;
+  color: #252424;
+}
+
+.button-group .chitiet:hover {
+  background: #9cd2fc;
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+  background: #FF6B6B;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #E63946;
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+  background: #A3D9A5;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #6CBF84;
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Đăng xuất */
+.logout-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #1c1919;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-link .icon {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #eeaff3;
+  transition: transform 0.3s ease;
+}
+
+.logout-link .link_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Bộ lọc */
+.day {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.rong h6 {
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.doi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  padding-left: 50px;
+}
+
+.doi label {
+  font-weight: bold;
+  min-width: 40px;
+  text-align: right;
+}
+
+.doi select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  min-width: 150px;
+  height: 37px;
+}
+
+select {
+  padding: 3px 10px;
+  width: 170px;
+  height: 35px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+select:hover {
+  border-color: #007bff;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Nút thêm phòng */
+.themphong {
+  background-color: #646dd2e4;
+  color: rgb(246, 245, 245);
+  font-size: 15px;
+  width: 160px;
+  height: 40px;
+  font-weight: bold;
+  padding: 10px 18px;
+  margin-bottom: 9px;
+  margin-left: 435px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 3px 3px 8px rgba(255, 182, 193, 0.4);
+  display: inline-block;
+  text-align: center;
+}
+
+.themphong:hover {
+  background-color: #4d45e2;
+  box-shadow: 3px 3px 12px rgba(169, 167, 235, 0.5);
+}
+
+.themphong:active {
+  background-color: #f2f1f6;
+  transform: scale(0.96);
+  box-shadow: 2px 2px 5px rgba(252, 251, 251, 0.6);
+}
+
+.themphong:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 146, 165, 0.6);
+}
+
+h6 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px #bae3f2, 0 0 20px #dee7ef, 0 0 30px #b0d7fa;
+}
+
+/* Icon */
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-container select {
+  padding-left: 56px;
+}
+
+.select-container .icon {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 25px;
+  color: black;
+}
+
+.select-container .ico {
+  position: absolute;
+  left: 5px;
+  top: 55%;
+  transform: translateY(-50%);
+  font-size: 25px;
+  color: black;
+}
+
+/* Nút tìm kiếm */
+.search-btn {
+  background-color: #FDDC9B;
+  border: none;
+  width: 49px;
+  margin-top: 9px;
+  height: 36px;
+  border-radius: 10px;
+  margin-left: 15px;
+  text-shadow: 1px 2px 2px rgb(139, 187, 215);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.search-btn i {
+  font-size: 18px;
+  color: #5E3582;
+  font-weight: bold;
+}
+
+.search-btn:hover {
+  background-color: #fefefe;
+  border: none;
+  transform: scale(1.2);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Bảng phòng */
+.room-table-container {
+  max-width: calc(100% - 80px); /* Giới hạn chiều rộng, trừ khoảng cách margin và padding */
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-x: auto;
+  transition: max-width 0.3s ease; /* Thêm transition cho max-width */
+}
+
+.sidebar.active ~ .content .room-table-container {
+  max-width: calc(100% - 260px); /* Thu nhỏ khi sidebar mở */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 20px;
+    width: calc(100% - 20px);
+    max-width: calc(100vw - 20px);
+  }
+
+  .sidebar.active ~ .content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    max-width: calc(100vw - 240px);
+  }
+
+  .room-table-container {
+    margin: 20px;
+    padding: 10px;
+    max-width: calc(100% - 40px);
+  }
+
+  .sidebar.active ~ .content .room-table-container {
+    max-width: calc(100% - 260px);
+  }
+
+  .search-bar input:focus {
+    width: 150px;
+  }
+
+  .themphong {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    margin-left: 10px;
+    width: calc(100% - 10px);
+    max-width: calc(100vw - 10px);
+  }
+
+  .sidebar.active ~ .content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    max-width: calc(100vw - 240px);
+  }
+
+  .room-table-container {
+    margin: 10px;
+    padding: 5px;
+    max-width: calc(100% - 20px);
+  }
+
+  .sidebar.active ~ .content .room-table-container {
+    max-width: calc(100% - 260px);
+  }
+
+  .search-bar input:focus {
+    width: 100px;
+  }
+
+  .themphong {
+    margin-left: 50px;
+    width: 120px;
+    height: 35px;
+    font-size: 12px;
+  }
+}
+
+/* Các phần còn lại giữ nguyên như trước (tìm kiếm, nút, icon, v.v.) */
