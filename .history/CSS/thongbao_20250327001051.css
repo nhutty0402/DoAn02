@@ -1,0 +1,122 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Body */
+body {
+  background: #e7e7e7;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  height: 60px;
+  background: #6796be;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 60px;
+  background: #fff;
+  transition: width 0.3s ease;
+  padding: 10px;
+}
+
+.sidebar.active {
+  width: 200px;
+}
+
+.sidebar .nav_list li {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.sidebar .nav_list li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Nội dung chính */
+.content {
+  margin-top: 60px;
+  margin-left: 60px;
+  padding: 20px;
+  width: calc(100% - 60px);
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.active ~ .content {
+  margin-left: 200px;
+  width: calc(100% - 200px);
+}
+
+/* Tabs */
+.tab-nav {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #6796be;
+}
+
+.tab-nav input {
+  display: none;
+}
+
+.tab-nav .tab-label {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tab-nav input:checked + .tab-label {
+  background: #6796be;
+  color: white;
+}
+
+/* Nội dung tab */
+.tab-pane {
+  display: none;
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#tab1:checked ~ .tab-content #tab1-content,
+#tab2:checked ~ .tab-content #tab2-content {
+  display: block;
+}
+
+/* Tin nhắn */
+.room-item {
+  background: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.room-item.new-message {
+  background: #e7f3ff;
+}

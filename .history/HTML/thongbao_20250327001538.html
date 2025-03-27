@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Thông Báo</title>
+    <link rel="stylesheet" href="../css/thongbao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'app/css/owl.carousel.min.css' %}" rel="stylesheet" />
+<link href="{% static 'app/css/all.min.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="menu-toggle">☰</div>
+        <div class="header-title">Nhà trọ Cần Thơ</div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="icon">
+                    <img src="../imag/moi.jpg" alt="Logo">
+                </div>
+                <div class="logo_name">Xin chào, admin</div>
+            </div>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="menu.html">
+                    <span class="icon">🏠</span>
+                    <span class="link_name">Trang chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="Quanlykhachhang.html">
+                    <span class="icon">🧑‍💼</span>
+                    <span class="link_name">Quản lý khách hàng</span>
+                </a>
+            </li>
+            <li>
+                <a href="doanhthu.html">
+                    <span class="icon">💰</span>
+                    <span class="link_name">Doanh thu</span>
+                </a>
+            </li>
+            <li>
+                <a href="dichvu.html">
+                    <span class="icon">💡</span>
+                    <span class="link_name">Dịch vụ</span>
+                </a>
+            </li>
+            <li>
+                <a href="hoadon.html">
+                    <span class="icon">🧾</span>
+                    <span class="link_name">Hóa đơn</span>
+                </a>
+            </li>
+            <li>
+                <a href="quanlihopdong.html">
+                    <span class="icon">📂</span>
+                    <span class="link_name">Quản lý hợp đồng</span>
+                </a>
+            </li>
+            <li>
+                <a href="dangxuat.html" class="logout-link">
+                    <span class="icon">🚪</span>
+                    <span class="link_name">Đăng Xuất</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Nội dung chính -->
+<!-- Nội dung chính -->
+<div class="content">
+  <div class="notification-frame">
+      <div class="tab-nav">
+          <input type="radio" id="tab1" name="tab" checked>
+          <label for="tab1" class="tab-label">Tin nhắn mới</label>
+
+          <input type="radio" id="tab2" name="tab">
+          <label for="tab2" class="tab-label">Tất cả tin nhắn</label>
+      </div>
+
+      <div class="tab-content">
+          <!-- Tin nhắn mới -->
+          
+            <div class="room-item alternate-row">
+                <div class="status-header">
+                     <h3>STT: 2</h3>
+                    <span class="status-indicator acoo">Hết Hạn</span>
+                </div>
+                <div class="info-row">
+                    <p><strong>Dãy:</strong> B</p>
+                    <p><strong>Phòng:</strong> 101</p>
+                    <p><strong>Giá:</strong> 1.500.000vnd</p>
+                    <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                    <p><strong>Số Điện Thoại:</strong> 0989965602</p>
+                </div><br><br><br>
+                <div class="action-buttons">
+                    <button class="btn btn-detail" onclick="document.location='xemchitiethopdong.html'">Xem Chi Tiết Hợp Đồng</button>  
+                </div>
+            </div>
+
+          <!-- Tất cả tin nhắn -->
+          <div class="tab-pane" id="tab2-content">
+              <h2>Tất cả tin nhắn</h2>
+              <div class="room-item">
+                  <h3>STT: 2</h3>
+                  <p><strong>Dãy:</strong> A | <strong>Phòng:</strong> 202</p>
+                  <p><strong>Tên:</strong> Nguyễn Văn A</p>
+                  <p><strong>Số Điện Thoại:</strong> 0123456789</p>
+                  <p><strong>Lý Do:</strong> Hỗ trợ kỹ thuật</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.tab-nav input').forEach(input => {
+  input.addEventListener('change', function() {
+      document.querySelectorAll('.tab-pane').forEach(tab => {
+          tab.style.display = 'none';
+      });
+      document.getElementById(this.id + "-content").style.display = 'block';
+  });
+});
+
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.toggle('active');
+});
+</script>
+</body>
+</html>

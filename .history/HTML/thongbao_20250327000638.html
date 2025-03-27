@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Thông Báo</title>
+    <link rel="stylesheet" href="../css/thongbao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'app/css/owl.carousel.min.css' %}" rel="stylesheet" />
+<link href="{% static 'app/css/all.min.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="menu-toggle">☰</div>
+        <div class="header-title">Nhà trọ Cần Thơ</div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="icon">
+                    <img src="../imag/moi.jpg" alt="Logo">
+                </div>
+                <div class="logo_name">Xin chào, admin</div>
+            </div>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="menu.html">
+                    <span class="icon">🏠</span>
+                    <span class="link_name">Trang chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="Quanlykhachhang.html">
+                    <span class="icon">🧑‍💼</span>
+                    <span class="link_name">Quản lý khách hàng</span>
+                </a>
+            </li>
+            <li>
+                <a href="doanhthu.html">
+                    <span class="icon">💰</span>
+                    <span class="link_name">Doanh thu</span>
+                </a>
+            </li>
+            <li>
+                <a href="dichvu.html">
+                    <span class="icon">💡</span>
+                    <span class="link_name">Dịch vụ</span>
+                </a>
+            </li>
+            <li>
+                <a href="hoadon.html">
+                    <span class="icon">🧾</span>
+                    <span class="link_name">Hóa đơn</span>
+                </a>
+            </li>
+            <li>
+                <a href="quanlihopdong.html">
+                    <span class="icon">📂</span>
+                    <span class="link_name">Quản lý hợp đồng</span>
+                </a>
+            </li>
+            <li>
+                <a href="dangxuat.html" class="logout-link">
+                    <span class="icon">🚪</span>
+                    <span class="link_name">Đăng Xuất</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Nội dung chính -->
+    <div class="content">
+        <!-- Khung chứa thông báo -->
+        <div class="notification-frame">
+            <!-- Tab điều hướng -->
+            <div class="tab-nav">
+              <input type="radio" id="tab1" name="tab" checked>
+              <label for="tab1" class="tab-label">Tin nhắn mới</label>
+          
+              <input type="radio" id="tab2" name="tab">
+              <label for="tab2" class="tab-label">Tất cả tin nhắn</label>
+          </div>
+
+            <!-- Nội dung tab -->
+            <div class="tab-content">
+              <div class="tab-pane" id="tab1-content">
+          
+                    <h2>Tin nhắn mới</h2>
+
+                        <!-- Tin nhắn mới 1 -->
+                        <div class="room-item new-message">
+                            <h3>STT: 1</h3>
+                            <div class="info-row">
+                                <p><strong>Dãy:</strong> B</p>
+                                <p><strong>Phòng:</strong> 101</p>
+                                <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                                <p><strong>Số Điện Thoại:</strong> 0989965602</p>
+                                <p><strong>Lý Do:</strong> Lấy lại số điện thoại</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-detail">Xem tin</button>
+                            </div>
+                        </div>
+               
+                        
+                        <!-- Tin nhắn mới 2 -->
+                        <div class="room-item new-message">
+                            <h3>STT: 2</h3>
+                            <div class="info-row">
+                                <p><strong>Dãy:</strong> A</p>
+                                <p><strong>Phòng:</strong> 202</p>
+                                <p><strong>Tên:</strong> Nguyễn Văn A</p>
+                                <p><strong>Số Điện Thoại:</strong> 0123456789</p>
+                                <p><strong>Lý Do:</strong> Hỗ trợ kỹ thuật</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-detail">Xem tin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+                <!-- Trang 2: Tất cả tin nhắn -->
+                <div class="tab-pane" id="tab2-content">
+                    <h2>Tất cả tin nhắn</h2>
+
+                        <!-- Tin nhắn 1 -->
+                        <div class="room-item alternate-row">
+                            <h3>STT: 1</h3>
+                            <div class="info-row">
+                                <p><strong>Dãy:</strong> B</p>
+                                <p><strong>Phòng:</strong> 101</p>
+                                <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                                <p><strong>Số Điện Thoại:</strong> 0989965602</p>
+                                <p><strong>Lý Do:</strong> Lấy lại số điện thoại</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-detail">Xem tin</button>
+                            </div>
+                        </div>
+                        <!-- Tin nhắn 2 -->
+                        <div class="room-item alternate-row">
+                            <h3>STT: 2</h3>
+                            <div class="info-row">
+                                <p><strong>Dãy:</strong> A</p>
+                                <p><strong>Phòng:</strong> 202</p>
+                                <p><strong>Tên:</strong> Nguyễn Văn A</p>
+                                <p><strong>Số Điện Thoại:</strong> 0123456789</p>
+                                <p><strong>Lý Do:</strong> Hỗ trợ kỹ thuật</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-detail">Xem tin</button>
+                            </div>
+                        </div>
+                        <!-- Tin nhắn 3 -->
+                        <div class="room-item alternate-row">
+                            <h3>STT: 3</h3>
+                            <div class="info-row">
+                                <p><strong>Dãy:</strong> C</p>
+                                <p><strong>Phòng:</strong> 303</p>
+                                <p><strong>Tên:</strong> Trần Thị B</p>
+                                <p><strong>Số Điện Thoại:</strong> 0987654321</p>
+                                <p><strong>Lý Do:</strong> Vấn đề thanh toán</p>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-detail">Xem tin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+  
+
+      
+  const toggle = document.querySelector('.menu-toggle');
+  const sidebar = document.querySelector('.sidebar');
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+</script>
+</html>
