@@ -250,40 +250,28 @@
   
       // Kiểm tra tin nhắn cần di chuyển từ localStorage
       const messageToMove = localStorage.getItem('messageToMove');
-      const messageHTML = localStorage.getItem('messageHTML');
-      if (messageToMove && messageHTML) {
+      if (messageToMove) {
           const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
           const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
           
           // Tìm tin nhắn trong tab "Tin nhắn mới"
           const itemToMove = newMessagesContainer.querySelector(`.room-item[data-message-id="${messageToMove}"]`);
           if (itemToMove) {
+              // Sao chép tin nhắn
+              const clonedItem = itemToMove.cloneNode(true);
+              
               // Xóa tin nhắn khỏi tab "Tin nhắn mới"
               itemToMove.remove();
   
               // Thêm tin nhắn vào tab "Tất cả tin nhắn"
-              const tempDiv = document.createElement('div');
-              tempDiv.innerHTML = messageHTML;
-              const clonedItem = tempDiv.firstChild;
               allMessagesContainer.appendChild(clonedItem);
   
               // Cập nhật STT cho cả hai tab
               updateMessageNumbers(newMessagesContainer, '#new-messages');
               updateMessageNumbers(allMessagesContainer, '#all-messages');
   
-              // Thêm lại sự kiện click cho nút "Xem tin" trong tin nhắn vừa được sao chép
-              const newViewButton = clonedItem.querySelector('.btn-detail');
-              newViewButton.addEventListener('click', function() {
-                  const messageId = clonedItem.getAttribute('data-message-id');
-                  const messageContent = clonedItem.outerHTML;
-                  localStorage.setItem('messageToMove', messageId);
-                  localStorage.setItem('messageHTML', messageContent);
-                  localStorage.setItem('activeTab', 'all-messages');
-              });
-  
               // Xóa trạng thái sau khi di chuyển
               localStorage.removeItem('messageToMove');
-              localStorage.removeItem('messageHTML');
           }
       }
   
@@ -315,11 +303,9 @@
               // Thêm sự kiện click cho nút "Xem tin"
               const viewButton = item.querySelector('.btn-detail');
               viewButton.addEventListener('click', function() {
-                  // Lưu ID và HTML của tin nhắn vào localStorage
+                  // Lưu ID của tin nhắn cần di chuyển vào localStorage
                   const messageId = item.getAttribute('data-message-id');
-                  const messageContent = item.outerHTML;
                   localStorage.setItem('messageToMove', messageId);
-                  localStorage.setItem('messageHTML', messageContent);
   
                   // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
                   localStorage.setItem('activeTab', 'all-messages');
@@ -351,9 +337,7 @@
                   const newViewButton = clonedItem.querySelector('.btn-detail');
                   newViewButton.addEventListener('click', function() {
                       const messageId = clonedItem.getAttribute('data-message-id');
-                      const messageContent = clonedItem.outerHTML;
                       localStorage.setItem('messageToMove', messageId);
-                      localStorage.setItem('messageHTML', messageContent);
                       localStorage.setItem('activeTab', 'all-messages');
                   });
   
