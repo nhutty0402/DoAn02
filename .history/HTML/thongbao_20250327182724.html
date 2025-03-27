@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/thongbao.css ">
+
+        <!--css-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="{% static 'app/css/style.css' %}" rel="stylesheet" />
+        <link href="{% static 'app/css/owl.caroysel.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'app/css/all.min.css' %}" rel="stylesheet" />
+        <!-- js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+      
+        <script src="{% static 'app/js/s3.js' %}"> </script>
+        <script src="{% static 'app/js/all.min.js' %}"> </script>
+        <script src="{% static 'app/js/mýcript.js' %}"> </script>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
+   
+    <body>
+        <header class="header">
+            <div class="menu-toggle">☰</div>
+            <div class="header-title">Nhà trọ Cần Thơ</div>
+
+            <div class="search-bar">
+              <input type="text" placeholder="Tìm kiếm..." />
+              <button class="timkiem" type="submit">🔍</button>
+              
+              <div class="button-group">
+                <button class="btn dathue" type="submit">Đã thuê</button>
+                <button class="btn phongtrong" type="submit">Phòng trống</button>
+                <button class="btn hientatca" type="submit">Hiện tất cả</button>
+            </div>
+          </div>
+          </header>
+        
+          <div class="sidebar">
+               <div class="logo_content">
+                
+                <div class="logo">
+                  <div class="icon">
+                    <img src="../imag/moi.jpg" alt="Logo">
+                  </div>
+                  <div class="logo_name">Xin chào, admin</div>
+                </div>
+                
+            </div>
+
+           <!--<div class="logo_name">Xin chào, Admin</div> -->
+
+            <ul class="nav_list">
+              <li>
+                <a href="menu.html">
+                  <span class="icon">🏠</span>
+                  <span class="link_name">Trang chủ</span>
+                </a>
+              </li>
+              <ul class="nav_list">
+                <li>
+                  <a href="Quanlykhachhang.html">
+                    <span class="icon">🧑‍💼</span>
+                    <span class="link_name">Quản lý khách hàng</span>
+                  </a>
+                </li>
+              <li>
+                <a href="doanhthu.html">
+                  <span class="icon"> 💰</span>
+                  <span class="link_name"> doanh thu</span>
+                </a>
+              </li>
+              <li>
+                <a href="dichvu.html">
+                  <span class="icon">💡</span>
+                  <span class="link_name">Dịch vụ</span>
+                </a>
+              </li>
+              
+              <!-- <li>
+                <a href="dichvu.html">
+                  <span class="icon">📊</span>
+                  <span class="link_name">Chỉ số điện nước</span>
+                </a>
+              </li> -->
+              <li>
+                <a href="hoadon.html">
+                  <span class="icon">🧾</span>
+                  <span class="link_name">Hóa đơn</span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="quanlihopdong.html">
+                  <span class="icon">📂</span>
+                  <span class="link_name">Quản lý hợp đồng</span>
+                </a>
+              </li>
+              <li>
+                <a href="dangxuat.html" class="logout-link">
+                  <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                  <span class="link_name">Đăng Xuất</span>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        
+      
+          <div class="content flex-grow-1 p-4">
+            <!-- Thanh công cụ phía trên -->
+            <div class="topbar d-flex justify-content-between align-items-center mb-4">
+             
+                <div>
+       
+                </div>
+            </div>
+        
+
+             
+
+            <div class="container mt-4">
+              <!-- Tab navigation -->
+              <ul class="nav nav-tabs" id="messageTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="new-messages-tab" data-bs-toggle="tab" data-bs-target="#new-messages" type="button" role="tab" aria-controls="new-messages" aria-selected="true">Tin nhắn mới</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="all-messages-tab" data-bs-toggle="tab" data-bs-target="#all-messages" type="button" role="tab" aria-controls="all-messages" aria-selected="false">Tất cả tin nhắn</button>
+                  </li>
+              </ul>
+      
+              <!-- Tab content -->
+              <div class="tab-content" id="messageTabsContent">
+                  <!-- Tab 1: Tin nhắn mới -->
+                  <div class="tab-pane fade show active" id="new-messages" role="tabpanel" aria-labelledby="new-messages-tab">
+                      <div class="room-list-container">
+                          <div class="room-item alternate-row">
+                              <h3>STT: 1</h3>
+                              <div class="info-row">
+                                  <p><strong>Dãy:</strong> B</p>
+                                  <p><strong>Phòng:</strong> 101</p>
+                                  <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                                  <p><strong>Lý do:</strong> Quên mật khẩu</p>
+                                  <p><strong>Nội Dung:</strong> Đổi mật khẩu thanhm</p>
+                              </div>
+                              <div class="action-buttons">
+                                  <button class="btn btn-detail" onclick="document.location='xemtin.html'">Xem tin</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+      
+                  <!-- Tab 2: Tất cả tin nhắn -->
+                  <div class="tab-pane fade" id="all-messages" role="tabpanel" aria-labelledby="all-messages-tab">
+                      <div class="room-list-container">
+                          <div class="room-item alternate-row">
+                              <h3>STT: 1</h3>
+                              <div class="info-row">
+                                  <p><strong>Dãy:</strong> B</p>
+                                  <p><strong>Phòng:</strong> 101</p>
+                                  <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                                  <p><strong>Lý do:</strong> Quên mật khẩu</p>
+                                  <p><strong>Nội Dung:</strong> Đổi mật khẩu thanhm</p>
+                              </div>
+                              <div class="action-buttons">
+                                  <button class="btn btn-detail" onclick="document.location='xemtin.html'">Xem tin</button>
+                              </div>
+                          </div>
+                          <div class="room-item alternate-row">
+                              <h3>STT: 2</h3>
+                              <div class="info-row">
+                                  <p><strong>Dãy:</strong> B</p>
+                                  <p><strong>Phòng:</strong> 101</p>
+                                  <p><strong>Tên:</strong> Phạm Hồng Nhựt Ty</p>
+                                  <p><strong>Lý do:</strong> Quên mật khẩu</p>
+                                  <p><strong>Nội Dung:</strong> Đổi mật khẩu thanhm</p>
+                              </div>
+                              <div class="action-buttons">
+                                  <button class="btn btn-detail" onclick="document.location='xemtin.html'">Xem tin</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      
+         
+        </div>
+        
+    </body>  
+    <script>     
+      const toggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+  
+      toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+    </script>
+     <!-- Bootstrap JS -->
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script>
+// Lấy tất cả thẻ <p> trong .info-row
+  document.querySelectorAll('.info-row p').forEach(p => {
+    // Chỉ xử lý thẻ <p> có <strong>Nội Dung:</strong>
+    if (p.querySelector('strong') && p.querySelector('strong').textContent.trim() === 'Nội Dung:') {
+        const text = p.childNodes[1].textContent.trim(); // Lấy text sau <strong>
+        const words = text.split(' '); // Tách thành mảng các từ
+
+        // Kiểm tra nếu số từ lớn hơn 3
+        if (words.length > 3) {
+            const limitedText = words.slice(0, 3).join(' ') + '...'; // Giới hạn 3 từ và thêm "..."
+            p.innerHTML = `<strong>Nội Dung:</strong> ${limitedText}`; // Cập nhật nội dung
+        }
+    }
+});
+
+
+</script>
+<script>
+  // Thêm vào file JS của bạn
+document.addEventListener('DOMContentLoaded', function() {
+  // Lấy ngày giờ hiện tại
+  const currentDate = new Date();
+  
+  // Thêm thời gian gửi vào mỗi tin nhắn
+  function addTimestampToMessages() {
+      const roomItems = document.querySelectorAll('.room-item');
+      
+      roomItems.forEach((item, index) => {
+          // Tạo thời gian gửi (giả lập: tin nhắn mới nhất cách hiện tại 1 giờ)
+          const messageTime = new Date(currentDate.getTime() - (index * 3600000));
+          const timeString = messageTime.toLocaleString('vi-VN', {
+              hour: '2-digit',
+              minute: '2-digit',
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+          });
+          
+          // Thêm phần tử hiển thị thời gian
+          const timeElement = document.createElement('p');
+          timeElement.innerHTML = `<strong>Thời gian:</strong> ${timeString}`;
+          item.querySelector('.info-row').appendChild(timeElement);
+          
+          // Lưu thời gian vào data attribute để kiểm tra sau
+          item.setAttribute('data-timestamp', messageTime.getTime());
+      });
+  }
+
+  // Hàm kiểm tra và di chuyển tin nhắn cũ
+  function moveOldMessages() {
+      const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
+      const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
+      const oneDayInMs = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
+      
+      const newMessageItems = newMessagesContainer.querySelectorAll('.room-item');
+      
+      newMessageItems.forEach(item => {
+          const messageTimestamp = parseInt(item.getAttribute('data-timestamp'));
+          const timeDifference = currentDate.getTime() - messageTimestamp;
+          
+          // Nếu tin nhắn cũ hơn 1 ngày, chuyển sang tab "Tất cả tin nhắn"
+          if (timeDifference > oneDayInMs) {
+              // Xóa khỏi tab Tin nhắn mới
+              const clonedItem = item.cloneNode(true);
+              item.remove();
+              
+              // Thêm vào tab Tất cả tin nhắn
+              allMessagesContainer.appendChild(clonedItem);
+              
+              // Cập nhật lại STT
+              updateMessageNumbers(allMessagesContainer, '#all-messages');
+              updateMessageNumbers(newMessagesContainer, '#new-messages');
+          }
+      });
+  }
+
+  // Hàm cập nhật số thứ tự (STT)
+  function updateMessageNumbers(container, tabId) {
+      const items = container.querySelectorAll('.room-item');
+      items.forEach((item, index) => {
+          const sttElement = item.querySelector('h3');
+          sttElement.textContent = `STT: ${index + 1}`;
+      });
+      
+      // Ẩn container nếu không còn tin nhắn
+      if (items.length === 0 && tabId === '#new-messages') {
+          container.innerHTML = '<p>Không có tin nhắn mới</p>';
+      }
+  }
+
+  // Thực thi các hàm
+  addTimestampToMessages();
+  moveOldMessages();
+
+  // Cập nhật định kỳ (mỗi 1 phút)
+  setInterval(moveOldMessages, 60000);
+});
+</script>
+     </html>

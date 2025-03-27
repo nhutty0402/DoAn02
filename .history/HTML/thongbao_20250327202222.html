@@ -240,38 +240,10 @@
       // Kiểm tra trạng thái tab khi tải trang
       const activeTab = localStorage.getItem('activeTab');
       if (activeTab === 'all-messages') {
+          // Kích hoạt tab "Tất cả tin nhắn"
           const allMessagesTab = document.querySelector('#all-messages-tab');
-          if (allMessagesTab) {
-              const bsTab = new bootstrap.Tab(allMessagesTab);
-              bsTab.show();
-          }
-      }
-  
-      // Kiểm tra tin nhắn cần di chuyển từ localStorage
-      const messageToMove = localStorage.getItem('messageToMove');
-      if (messageToMove) {
-          const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
-          const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
-          
-          // Tìm tin nhắn trong tab "Tin nhắn mới"
-          const itemToMove = newMessagesContainer.querySelector(`.room-item[data-message-id="${messageToMove}"]`);
-          if (itemToMove) {
-              // Sao chép tin nhắn
-              const clonedItem = itemToMove.cloneNode(true);
-              
-              // Xóa tin nhắn khỏi tab "Tin nhắn mới"
-              itemToMove.remove();
-  
-              // Thêm tin nhắn vào tab "Tất cả tin nhắn"
-              allMessagesContainer.appendChild(clonedItem);
-  
-              // Cập nhật STT cho cả hai tab
-              updateMessageNumbers(newMessagesContainer, '#new-messages');
-              updateMessageNumbers(allMessagesContainer, '#all-messages');
-  
-              // Xóa trạng thái sau khi di chuyển
-              localStorage.removeItem('messageToMove');
-          }
+          const bsTab = new bootstrap.Tab(allMessagesTab);
+          bsTab.show();
       }
   
       // Hàm thêm thời gian và STT cho các tin nhắn
@@ -302,14 +274,38 @@
               // Thêm sự kiện click cho nút "Xem tin"
               const viewButton = item.querySelector('.btn-detail');
               viewButton.addEventListener('click', function() {
-                  // Lưu ID của tin nhắn cần di chuyển vào localStorage
-                  const messageId = item.getAttribute('data-message-id');
-                  localStorage.setItem('messageToMove', messageId);
-  
-                  // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
-                  localStorage.setItem('activeTab', 'all-messages');
+                  moveMessageToAllMessages(item);
               });
           });
+      }
+  
+      // Hàm di chuyển tin nhắn từ "Tin nhắn mới" sang "Tất cả tin nhắn" khi bấm "Xem tin"
+      function moveMessageToAllMessages(item) {
+          const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
+          const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
+  
+          // Sao chép tin nhắn và xóa khỏi tab "Tin nhắn mới"
+          const clonedItem = item.cloneNode(true);
+          item.remove();
+  
+          // Thêm tin nhắn vào tab "Tất cả tin nhắn"
+          allMessagesContainer.appendChild(clonedItem);
+  
+          // Cập nhật STT cho cả hai tab
+          updateMessageNumbers(newMessagesContainer, '#new-messages');
+          updateMessageNumbers(allMessagesContainer, '#all-messages');
+  
+          // Thêm lại sự kiện click cho nút "Xem tin" trong tin nhắn vừa được sao chép
+          const newViewButton = clonedItem.querySelector('.btn-detail');
+          newViewButton.addEventListener('click', function() {
+              moveMessageToAllMessages(clonedItem);
+          });
+  
+          // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
+          localStorage.setItem('activeTab', 'all-messages');
+  
+          // Chuyển hướng đến trang xem tin
+          document.location = 'xemtin.html';
       }
   
       // Hàm di chuyển tin nhắn cũ (quá 1 ngày) từ "Tin nhắn mới" sang "Tất cả tin nhắn"
@@ -335,9 +331,7 @@
                   // Thêm lại sự kiện click cho nút "Xem tin" trong tin nhắn vừa được sao chép
                   const newViewButton = clonedItem.querySelector('.btn-detail');
                   newViewButton.addEventListener('click', function() {
-                      const messageId = clonedItem.getAttribute('data-message-id');
-                      localStorage.setItem('messageToMove', messageId);
-                      localStorage.setItem('activeTab', 'all-messages');
+                      moveMessageToAllMessages(clonedItem);
                   });
   
                   // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage

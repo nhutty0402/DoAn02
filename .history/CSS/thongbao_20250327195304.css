@@ -223,8 +223,8 @@ body {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 5px 8px; /* Điều chỉnh padding hợp lý */
-  margin-bottom: 15px; /* Đảm bảo khoảng cách giữa các room-item */
+  padding: 5px 8px; /* Giảm padding để thu gọn khung */
+  margin-bottom: 15px; /* Giảm margin-bottom để thu gọn khoảng cách giữa các room-item */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -238,8 +238,8 @@ body {
   display: flex;
   align-items: center;
   margin: 0 0 5px 0;
-  padding: 0; /* Bỏ padding không cần thiết */
-  font-size: 0.85em; /* Font-size nhỏ gọn */
+  padding-top: 0; /* Bỏ padding-top không cần thiết */
+  font-size: 0.85em; /* Giảm font-size để thu gọn */
   color: #666;
 }
 
@@ -263,16 +263,15 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  min-height: 30px; /* Đảm bảo content-row có chiều cao tối thiểu để tránh chồng lấn */
 }
 
 /* Định dạng tiêu đề STT */
 .room-item h3 {
   font-size: 13px;
-  margin: 0 10px 0 0;
+  margin: 0 10px 0 0; /* Giảm margin để thu gọn */
   color: #333;
   white-space: nowrap;
-  width: 40px; /* Chiều rộng cố định cho STT */
+  width: 40px; /* Giảm chiều rộng của STT */
 }
 
 /* Container cho các thẻ p */
@@ -280,13 +279,13 @@ body {
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 100px; /* Khoảng cách hợp lý giữa các phần tử */
+  gap: 100px; /* Giảm gap từ 100px xuống 30px để thu gọn chiều ngang */
 }
 
 /* Định dạng các đoạn văn bản */
 .room-item p {
   margin: 0;
-  font-size: 0.85em;
+  font-size: 0.85em; /* Giảm font-size để thu gọn */
   color: #555;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -304,7 +303,7 @@ body {
 /* Thu nhỏ Dãy và Phòng */
 .room-item p:nth-child(1),
 .room-item p:nth-child(2) {
-  flex: 0 0 50px;
+  flex: 0 0 50px; /* Giảm chiều rộng của Dãy và Phòng */
   font-size: 0.8em;
 }
 
@@ -312,12 +311,13 @@ body {
 .action-buttons {
   display: flex;
   gap: 5px;
-  margin-left: 10px;
+  
+  margin-left: 10px; /* Giảm margin-left để thu gọn */
 }
 
 /* Định dạng chung cho các nút */
 .btn {
-  padding: 4px 8px;
+  padding: 4px 8px; /* Giảm padding của nút để thu gọn */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -335,76 +335,4 @@ body {
   background-color: #9cd2fc;
   color: rgb(77, 73, 73);
   transform: translateY(-2px);
-}
-
-/* Tab navigation */
-.nav-tabs {
-  border-bottom: none;
-  display: flex;
-  gap: 10px;
-  padding: 10px 0;
-}
-
-.nav-item {
-  margin: 0;
-}
-
-.nav-link {
-  background: #ffffff;
-  color: #444;
-  font-weight: 600;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-  background: #f0f2f5;
-  color: #4682b4;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-}
-
-.nav-link.active {
-  background: #4682b4;
-  color: #fff;
-  border: none;
-  box-shadow: 0 5px 15px rgba(70, 130, 180, 0.4);
-  transform: translateY(-2px);
-}
-
-.nav-link:focus {
-  outline: none;
-}
-
-/* Các quy tắc bổ sung cần thiết */
-select {
-  padding: 3px 10px;
-  width: 170px;
-  height: 35px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-select:hover {
-  border-color: #007bff;
-}
-
-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-h6 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px #bae3f2, 0 0 20px #dee7ef, 0 0 30px #b0d7fa;
 }

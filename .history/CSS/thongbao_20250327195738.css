@@ -280,7 +280,7 @@ body {
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 100px; /* Khoảng cách hợp lý giữa các phần tử */
+  gap: 30px; /* Khoảng cách hợp lý giữa các phần tử */
 }
 
 /* Định dạng các đoạn văn bản */

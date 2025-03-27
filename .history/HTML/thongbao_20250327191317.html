@@ -224,171 +224,111 @@
         const words = text.split(' '); // Tách thành mảng các từ
 
         // Kiểm tra nếu số từ lớn hơn 3
-        if (words.length > 4) {
-            const limitedText = words.slice(0, 4).join(' ') + '...'; // Giới hạn 3 từ và thêm "..."
+        if (words.length > 3) {
+            const limitedText = words.slice(0, 3).join(' ') + '...'; // Giới hạn 3 từ và thêm "..."
             p.innerHTML = `<strong>Nội Dung:</strong> ${limitedText}`; // Cập nhật nội dung
         }
     }
 });
+
+
 </script>
-
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-      const currentDate = new Date();
-  
-      // Kiểm tra trạng thái tab khi tải trang
-      const activeTab = localStorage.getItem('activeTab');
-      if (activeTab === 'all-messages') {
-          const allMessagesTab = document.querySelector('#all-messages-tab');
-          if (allMessagesTab) {
-              const bsTab = new bootstrap.Tab(allMessagesTab);
-              bsTab.show();
-          }
-      }
-  
-      // Kiểm tra tin nhắn cần di chuyển từ localStorage
-      const messageToMove = localStorage.getItem('messageToMove');
-      if (messageToMove) {
-          const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
-          const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
-          
-          // Tìm tin nhắn trong tab "Tin nhắn mới"
-          const itemToMove = newMessagesContainer.querySelector(`.room-item[data-message-id="${messageToMove}"]`);
-          if (itemToMove) {
-              // Sao chép tin nhắn
-              const clonedItem = itemToMove.cloneNode(true);
-              
-              // Xóa tin nhắn khỏi tab "Tin nhắn mới"
-              itemToMove.remove();
-  
-              // Thêm tin nhắn vào tab "Tất cả tin nhắn"
-              allMessagesContainer.appendChild(clonedItem);
-  
-              // Cập nhật STT cho cả hai tab
-              updateMessageNumbers(newMessagesContainer, '#new-messages');
-              updateMessageNumbers(allMessagesContainer, '#all-messages');
-  
-              // Xóa trạng thái sau khi di chuyển
-              localStorage.removeItem('messageToMove');
-          }
-      }
-  
-      // Hàm thêm thời gian và STT cho các tin nhắn
-      function addTimestampToMessages() {
-          const roomItems = document.querySelectorAll('.room-item');
-          
-          roomItems.forEach((item, index) => {
-              const messageTime = new Date(currentDate.getTime() - (index * 3600000));
-              const timeString = messageTime.toLocaleString('vi-VN', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric'
-              });
-              
-              // Chèn thời gian vào span.time-text
-              const timeElement = item.querySelector('.time-text');
-              timeElement.textContent = timeString;
-              
-              // Cập nhật STT
-              const sttElement = item.querySelector('h3');
-              sttElement.textContent = `STT: ${index + 1}`;
-              
-              // Lưu thời gian vào data attribute
-              item.setAttribute('data-timestamp', messageTime.getTime());
-  
-              // Thêm sự kiện click cho nút "Xem tin"
-              const viewButton = item.querySelector('.btn-detail');
-              viewButton.addEventListener('click', function() {
-                  // Lưu ID của tin nhắn cần di chuyển vào localStorage
-                  const messageId = item.getAttribute('data-message-id');
-                  localStorage.setItem('messageToMove', messageId);
-  
-                  // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
-                  localStorage.setItem('activeTab', 'all-messages');
-              });
-          });
-      }
-  
-      // Hàm di chuyển tin nhắn cũ (quá 1 ngày) từ "Tin nhắn mới" sang "Tất cả tin nhắn"
-      function moveOldMessages() {
-          const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
-          const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
-          const oneDayInMs = 24 * 60 * 60 * 1000;
-          
-          const newMessageItems = newMessagesContainer.querySelectorAll('.room-item');
-          
-          newMessageItems.forEach(item => {
-              const messageTimestamp = parseInt(item.getAttribute('data-timestamp'));
-              const timeDifference = currentDate.getTime() - messageTimestamp;
-              
-              if (timeDifference > oneDayInMs) {
-                  const clonedItem = item.cloneNode(true);
-                  item.remove();
-                  
-                  allMessagesContainer.appendChild(clonedItem);
-                  updateMessageNumbers(allMessagesContainer, '#all-messages');
-                  updateMessageNumbers(newMessagesContainer, '#new-messages');
-  
-                  // Thêm lại sự kiện click cho nút "Xem tin" trong tin nhắn vừa được sao chép
-                  const newViewButton = clonedItem.querySelector('.btn-detail');
-                  newViewButton.addEventListener('click', function() {
-                      const messageId = clonedItem.getAttribute('data-message-id');
-                      localStorage.setItem('messageToMove', messageId);
-                      localStorage.setItem('activeTab', 'all-messages');
-                  });
-  
-                  // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
-                  localStorage.setItem('activeTab', 'all-messages');
-              }
-          });
-      }
-  
-      // Hàm cập nhật số thứ tự (STT) và kiểm tra thời gian
-      function updateMessageNumbers(container, tabId) {
-          const items = container.querySelectorAll('.room-item');
-          items.forEach((item, index) => {
-              const sttElement = item.querySelector('h3');
-              sttElement.textContent = `STT: ${index + 1}`;
-              
-              // Cập nhật thời gian nếu chưa có
-              if (!item.querySelector('.time-text').textContent) {
-                  const timestamp = parseInt(item.getAttribute('data-timestamp'));
-                  const messageTime = new Date(timestamp);
-                  const timeString = messageTime.toLocaleString('vi-VN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: 'numeric'
-                  });
-                  item.querySelector('.time-text').textContent = timeString;
-              }
-          });
-          
-          if (items.length === 0 && tabId === '#new-messages') {
-              container.innerHTML = '<p>Không có tin nhắn mới</p>';
-          }
-      }
-  
-      // Thực thi các hàm
-      addTimestampToMessages();
-      moveOldMessages();
-      setInterval(moveOldMessages, 60000); // Kiểm tra mỗi 1 phút
-  
-      // Thêm sự kiện khi chuyển đổi tab để lưu trạng thái
-      document.querySelectorAll('.nav-link').forEach(tab => {
-          tab.addEventListener('click', function() {
-              const tabId = this.getAttribute('id');
-              if (tabId === 'all-messages-tab') {
-                  localStorage.setItem('activeTab', 'all-messages');
-              } else {
-                  localStorage.setItem('activeTab', 'new-messages');
-              }
-          });
-      });
-  });
-  </script>
+    // Lấy ngày giờ hiện tại
+    const currentDate = new Date();
+    
+    // Thêm thời gian gửi vào trên cùng
+    function addTimestampToMessages() {
+        const roomItems = document.querySelectorAll('.room-item');
+        
+        roomItems.forEach((item, index) => {
+            // Tạo thời gian gửi (giả lập: tin nhắn mới nhất cách hiện tại 1 giờ)
+            const messageTime = new Date(currentDate.getTime() - (index * 3600000));
+            const timeString = messageTime.toLocaleString('vi-VN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            
+            // Tạo phần tử thời gian
+            const timeElement = document.createElement('p');
+            timeElement.className = 'message-time';
+            timeElement.innerHTML = `<span>${timeString}</span>`;
+            
+            // Chèn thời gian vào đầu tiên trong room-item
+            item.insertBefore(timeElement, item.firstChild);
+            
+            // Cập nhật STT
+            const sttElement = item.querySelector('h3');
+            sttElement.textContent = `STT: ${index + 1}`;
+            
+            // Lưu thời gian vào data attribute để kiểm tra sau
+            item.setAttribute('data-timestamp', messageTime.getTime());
+        });
+    }
+
+    // Hàm kiểm tra và di chuyển tin nhắn cũ
+    function moveOldMessages() {
+        const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
+        const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
+        const oneDayInMs = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
+        
+        const newMessageItems = newMessagesContainer.querySelectorAll('.room-item');
+        
+        newMessageItems.forEach(item => {
+            const messageTimestamp = parseInt(item.getAttribute('data-timestamp'));
+            const timeDifference = currentDate.getTime() - messageTimestamp;
+            
+            if (timeDifference > oneDayInMs) {
+                const clonedItem = item.cloneNode(true);
+                item.remove();
+                
+                allMessagesContainer.appendChild(clonedItem);
+                updateMessageNumbers(allMessagesContainer, '#all-messages');
+                updateMessageNumbers(newMessagesContainer, '#new-messages');
+            }
+        });
+    }
+
+    // Hàm cập nhật số thứ tự (STT)
+    function updateMessageNumbers(container, tabId) {
+        const items = container.querySelectorAll('.room-item');
+        items.forEach((item, index) => {
+            const sttElement = item.querySelector('h3');
+            sttElement.textContent = `STT: ${index + 1}`;
+            
+            // Cập nhật thời gian nếu chưa có
+            if (!item.querySelector('.message-time')) {
+                const timestamp = parseInt(item.getAttribute('data-timestamp'));
+                const messageTime = new Date(timestamp);
+                const timeString = messageTime.toLocaleString('vi-VN', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+                const timeElement = document.createElement('p');
+                timeElement.className = 'message-time';
+                timeElement.innerHTML = `<span>${timeString}</span>`;
+                item.insertBefore(timeElement, item.firstChild);
+            }
+        });
+        
+        if (items.length === 0 && tabId === '#new-messages') {
+            container.innerHTML = '<p>Không có tin nhắn mới</p>';
+        }
+    }
+
+    // Thực thi các hàm
+    addTimestampToMessages();
+    moveOldMessages();
+
+    // Cập nhật định kỳ (mỗi 1 phút)
+    setInterval(moveOldMessages, 60000);
+});
+</script>
      </html>

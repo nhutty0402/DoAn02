@@ -151,6 +151,49 @@ body {
   max-width: calc(100vw - 240px);
 }
 
+/* Thanh tìm kiếm */
+.search-bar {
+  display: flex;
+  align-items: center;
+  height: 38.5px;
+  margin-left: auto;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #5E3582;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 90px;
+  transition: width 0.3s ease;
+}
+
+.search-bar input:focus {
+  width: 270px;
+}
+
+.search-bar button {
+  background-color: #eeaff3;
+  border: none;
+  color: #1c1919;
+  padding: 5px 10px;
+  height: 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #f186f1;
+}
 
 /* Button group */
 .button-group {
@@ -208,116 +251,18 @@ body {
   color: #d94bd3;
 }
 
-/* Container chính chứa bảng */
-/* Container chính chứa bảng */
-.room-list-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
-/* Định dạng từng mục room-item */
-.room-item {
-  display: flex;
-  flex-direction: column; /* Chuyển sang column để thời gian nằm trên */
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 5px 8px; /* Điều chỉnh padding hợp lý */
-  margin-bottom: 15px; /* Đảm bảo khoảng cách giữa các room-item */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* Màu nền xen kẽ */
-.room-item.alternate-row {
-  background-color: #f9f9f9;
-}
-
-/* Định dạng thời gian */
-.message-time {
-  display: flex;
-  align-items: center;
-  margin: 0 0 5px 0;
-  padding: 0; /* Bỏ padding không cần thiết */
-  font-size: 0.85em; /* Font-size nhỏ gọn */
-  color: #666;
-}
-
-/* Chấm xanh */
-.status-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background-color: #4c92ee; /* Màu xanh giống trong hình */
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-/* Thời gian */
-.time-text {
-  font-weight: normal;
-}
-
-/* Container con chứa STT và info-row */
-.room-item .content-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  min-height: 30px; /* Đảm bảo content-row có chiều cao tối thiểu để tránh chồng lấn */
-}
-
-/* Định dạng tiêu đề STT */
-.room-item h3 {
-  font-size: 13px;
-  margin: 0 10px 0 0;
-  color: #333;
-  white-space: nowrap;
-  width: 40px; /* Chiều rộng cố định cho STT */
-}
-
-/* Container cho các thẻ p */
-.room-item .info-row {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  gap: 100px; /* Khoảng cách hợp lý giữa các phần tử */
-}
-
-/* Định dạng các đoạn văn bản */
-.room-item p {
-  margin: 0;
-  font-size: 0.85em;
-  color: #555;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* Định dạng phần strong trong p */
-.room-item p strong {
-  font-weight: bold;
-  color: #000;
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
-}
-
-/* Thu nhỏ Dãy và Phòng */
-.room-item p:nth-child(1),
-.room-item p:nth-child(2) {
-  flex: 0 0 50px;
-  font-size: 0.8em;
-}
 
 /* Định dạng khu vực nút hành động */
 .action-buttons {
   display: flex;
   gap: 5px;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 /* Định dạng chung cho các nút */
 .btn {
-  padding: 4px 8px;
+  padding: 6px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -335,49 +280,6 @@ body {
   background-color: #9cd2fc;
   color: rgb(77, 73, 73);
   transform: translateY(-2px);
-}
-
-/* Tab navigation */
-.nav-tabs {
-  border-bottom: none;
-  display: flex;
-  gap: 10px;
-  padding: 10px 0;
-}
-
-.nav-item {
-  margin: 0;
-}
-
-.nav-link {
-  background: #ffffff;
-  color: #444;
-  font-weight: 600;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-  background: #f0f2f5;
-  color: #4682b4;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-}
-
-.nav-link.active {
-  background: #4682b4;
-  color: #fff;
-  border: none;
-  box-shadow: 0 5px 15px rgba(70, 130, 180, 0.4);
-  transform: translateY(-2px);
-}
-
-.nav-link:focus {
-  outline: none;
 }
 
 /* Các quy tắc bổ sung cần thiết */
@@ -407,4 +309,154 @@ h6 {
   font-weight: bold;
   color: #fff;
   text-shadow: 0 0 10px #bae3f2, 0 0 20px #dee7ef, 0 0 30px #b0d7fa;
+}
+/* ================================================================================================================ */
+/* ===============================================THÂN============================================================= */
+/* ==================================================================================================================== */
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Container chính chứa bảng */
+.room-list-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Định dạng từng mục room-item */
+.room-item {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  flex-wrap: nowrap;
+}
+
+/* Màu nền xen kẽ */
+.room-item.alternate-row {
+  background-color: #f9f9f9;
+}
+
+/* Định dạng tiêu đề STT */
+.room-item h3 {
+  font-size: 13px;
+  margin: 0 15px 0 0;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Container cho các thẻ p */
+.room-item .info-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex: 1;
+}
+
+/* Định dạng các đoạn văn bản */
+.room-item p {
+  margin: 0 10px 0 0;
+  font-size: 0.9em;
+  color: #555;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Thu nhỏ Dãy và Phòng */
+.room-item p:nth-child(1),
+.room-item p:nth-child(2) {
+  flex: 0 0 60px;
+  font-size: 0.8em;
+}
+
+/* Định dạng phần strong trong p */
+.room-item p strong {
+  font-weight: bold;
+  color: #000;
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* Định dạng khu vực nút hành động */
+.action-buttons {
+  display: flex;
+  gap: 5px;
+  margin-left: 15px;
+}
+
+/* Định dạng chung cho các nút */
+.btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: background-color 0.3s;
+}
+
+/* Nút Xem Chi Tiết (btn-detail) */
+.action-buttons .btn-detail {
+  background-color: #8fd1f3;
+  color: #252424;
+}
+
+.action-buttons .btn-detail:hover {
+  background-color: #9cd2fc;
+  color: rgb(77, 73, 73);
+  transform: translateY(-2px);
+}
+
+/* Tab navigation */
+.nav-tabs {
+  border-bottom: none; /* Loại bỏ đường viền dưới mặc định */
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa các tab */
+  padding: 10px 0;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  background: #ffffff; /* Nền trắng */
+  color: #444; /* Màu chữ tối */
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 1px solid #e0e0e0; /* Viền nhẹ */
+  border-radius: 12px; /* Bo góc tab */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); /* Bóng đổ nhẹ */
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #f0f2f5; /* Nền xám nhạt khi hover */
+  color: #4682b4; /* Màu xanh đồng bộ */
+  transform: translateY(-2px); /* Nâng lên */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12); /* Bóng đổ đậm hơn */
+}
+
+.nav-link.active {
+  background: #4682b4; /* Màu xanh khi active */
+  color: #fff; /* Chữ trắng */
+  border: none; /* Loại bỏ viền khi active */
+  box-shadow: 0 5px 15px rgba(70, 130, 180, 0.4); /* Bóng đổ nổi bật */
+  transform: translateY(-2px);
+}
+
+.nav-link:focus {
+  outline: none;
 }

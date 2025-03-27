@@ -224,57 +224,19 @@
         const words = text.split(' '); // Tách thành mảng các từ
 
         // Kiểm tra nếu số từ lớn hơn 3
-        if (words.length > 4) {
+        if (words.length > 3) {
             const limitedText = words.slice(0, 4).join(' ') + '...'; // Giới hạn 3 từ và thêm "..."
             p.innerHTML = `<strong>Nội Dung:</strong> ${limitedText}`; // Cập nhật nội dung
         }
     }
 });
+
+
 </script>
-
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const currentDate = new Date();
-  
-      // Kiểm tra trạng thái tab khi tải trang
-      const activeTab = localStorage.getItem('activeTab');
-      if (activeTab === 'all-messages') {
-          const allMessagesTab = document.querySelector('#all-messages-tab');
-          if (allMessagesTab) {
-              const bsTab = new bootstrap.Tab(allMessagesTab);
-              bsTab.show();
-          }
-      }
-  
-      // Kiểm tra tin nhắn cần di chuyển từ localStorage
-      const messageToMove = localStorage.getItem('messageToMove');
-      if (messageToMove) {
-          const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
-          const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
-          
-          // Tìm tin nhắn trong tab "Tin nhắn mới"
-          const itemToMove = newMessagesContainer.querySelector(`.room-item[data-message-id="${messageToMove}"]`);
-          if (itemToMove) {
-              // Sao chép tin nhắn
-              const clonedItem = itemToMove.cloneNode(true);
-              
-              // Xóa tin nhắn khỏi tab "Tin nhắn mới"
-              itemToMove.remove();
-  
-              // Thêm tin nhắn vào tab "Tất cả tin nhắn"
-              allMessagesContainer.appendChild(clonedItem);
-  
-              // Cập nhật STT cho cả hai tab
-              updateMessageNumbers(newMessagesContainer, '#new-messages');
-              updateMessageNumbers(allMessagesContainer, '#all-messages');
-  
-              // Xóa trạng thái sau khi di chuyển
-              localStorage.removeItem('messageToMove');
-          }
-      }
-  
-      // Hàm thêm thời gian và STT cho các tin nhắn
+      
       function addTimestampToMessages() {
           const roomItems = document.querySelectorAll('.room-item');
           
@@ -298,21 +260,9 @@
               
               // Lưu thời gian vào data attribute
               item.setAttribute('data-timestamp', messageTime.getTime());
-  
-              // Thêm sự kiện click cho nút "Xem tin"
-              const viewButton = item.querySelector('.btn-detail');
-              viewButton.addEventListener('click', function() {
-                  // Lưu ID của tin nhắn cần di chuyển vào localStorage
-                  const messageId = item.getAttribute('data-message-id');
-                  localStorage.setItem('messageToMove', messageId);
-  
-                  // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
-                  localStorage.setItem('activeTab', 'all-messages');
-              });
           });
       }
   
-      // Hàm di chuyển tin nhắn cũ (quá 1 ngày) từ "Tin nhắn mới" sang "Tất cả tin nhắn"
       function moveOldMessages() {
           const newMessagesContainer = document.querySelector('#new-messages .room-list-container');
           const allMessagesContainer = document.querySelector('#all-messages .room-list-container');
@@ -331,22 +281,10 @@
                   allMessagesContainer.appendChild(clonedItem);
                   updateMessageNumbers(allMessagesContainer, '#all-messages');
                   updateMessageNumbers(newMessagesContainer, '#new-messages');
-  
-                  // Thêm lại sự kiện click cho nút "Xem tin" trong tin nhắn vừa được sao chép
-                  const newViewButton = clonedItem.querySelector('.btn-detail');
-                  newViewButton.addEventListener('click', function() {
-                      const messageId = clonedItem.getAttribute('data-message-id');
-                      localStorage.setItem('messageToMove', messageId);
-                      localStorage.setItem('activeTab', 'all-messages');
-                  });
-  
-                  // Lưu trạng thái tab "Tất cả tin nhắn" vào localStorage
-                  localStorage.setItem('activeTab', 'all-messages');
               }
           });
       }
   
-      // Hàm cập nhật số thứ tự (STT) và kiểm tra thời gian
       function updateMessageNumbers(container, tabId) {
           const items = container.querySelectorAll('.room-item');
           items.forEach((item, index) => {
@@ -373,22 +311,9 @@
           }
       }
   
-      // Thực thi các hàm
       addTimestampToMessages();
       moveOldMessages();
-      setInterval(moveOldMessages, 60000); // Kiểm tra mỗi 1 phút
-  
-      // Thêm sự kiện khi chuyển đổi tab để lưu trạng thái
-      document.querySelectorAll('.nav-link').forEach(tab => {
-          tab.addEventListener('click', function() {
-              const tabId = this.getAttribute('id');
-              if (tabId === 'all-messages-tab') {
-                  localStorage.setItem('activeTab', 'all-messages');
-              } else {
-                  localStorage.setItem('activeTab', 'new-messages');
-              }
-          });
-      });
+      setInterval(moveOldMessages, 60000);
   });
   </script>
      </html>
